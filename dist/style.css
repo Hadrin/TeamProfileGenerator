@@ -1,0 +1,26 @@
+body {
+            background-image: linear-gradient(lightblue, white);
+            background-repeat: no-repeat;
+        }
+        
+        .card{
+            width: 20%;
+            border: 1px solid black;
+            border-radius: 5px;
+            filter: drop-shadow(5px 5px grey);
+            background-color: beige;
+            padding: 5px;
+            margin: 5px;
+            line-height: 0%;
+            flex: 0 0 auto;
+        }
+        
+        h1{
+            text-align: center;
+        }
+        
+        #cardContainer {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
