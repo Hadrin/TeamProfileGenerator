@@ -3,9 +3,9 @@ const inquirer = require('inquirer');
 const Engineer = require('./src/Engineer');
 const Intern = require('./src/Intern');
 const Manager = require('./src/Manager');
-const pageCreator = require('./lib/pageCreator');
+const PageCreator = require('./lib/pageCreator');
 
-
+pageCreator = new PageCreator();
 //Creates an array to hold team members
 let team = new Array;
 
@@ -102,7 +102,7 @@ const menuPrompt = [
 function addManager() {
     inquirer.prompt(teamManagerPrompt).then((answers) => {
         let newManager = new Manager(answers.name, answers.employeeID, answers.email, answers.office);
-        team.push(newManager);
+        pageCreator.createEmployeeCard(newManager);
         console.log(`Manager ${answers.name} created`);
         mainLoop();
     });
@@ -112,7 +112,7 @@ function addManager() {
 function addEngineer() {
     inquirer.prompt(engineerPrompt).then((answers) => {
         let newEngineer = new Engineer(answers.name, answers.employeeID, answers.email, answers.github);
-        team.push(newEngineer);
+        pageCreator.createEmployeeCard(newEngineer);
         console.log(`Engineer ${answers.name} created`);
         mainLoop();
     });
@@ -122,7 +122,7 @@ function addEngineer() {
 function addIntern() {
     inquirer.prompt(internPrompt).then((answers) => {
         let newIntern = new Intern(answers.name, answers.employeeID, answers.email, answers.school);
-        team.push(newIntern);
+        pageCreator.createEmployeeCard(newIntern);
         console.log(`Intern ${answers.name} created`);
         mainLoop();
     });
@@ -139,7 +139,7 @@ function mainLoop() {
                 addIntern();
                 break;
             case "Exit and generate page":
-                createPage();
+                pageCreator.finishPage();
                 break;
             default:
                 throw new Error("improper menu choice detected: " + answers.choice);
@@ -147,10 +147,7 @@ function mainLoop() {
     })
 }
 
-//TODO: Page Creation Logic
-function createPage() {
-    new pageCreator(team);
-}
+
 
 //Begin primary program loop
 addManager();
